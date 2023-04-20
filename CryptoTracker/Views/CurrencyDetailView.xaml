@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="CryptoTracker.Views.CurrencyDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Margin="10">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding CurrencyDetail.Name}" FontWeight="Bold" FontSize="24" Margin="10"/>
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Other TextBlocks -->
+            <TextBlock Grid.Row="0" Text="Symbol:">
+                <TextBlock Text="{Binding CurrencyDetail.Symbol}" FontWeight="Bold" />
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Text="Price:">
+                <TextBlock Text="{Binding CurrencyDetail.Price, StringFormat=C}" FontWeight="Bold" />
+            </TextBlock>
+
+            <TextBlock Grid.Row="2" Text="Volume:">
+                <TextBlock Text="{Binding CurrencyDetail.Volume, StringFormat=N0}" FontWeight="Bold" />
+            </TextBlock>
+
+            <TextBlock Grid.Row="3" Text="Price Change (24h):">
+                <TextBlock Text="{Binding CurrencyDetail.PriceChange, StringFormat=P2}" FontWeight="Bold" />
+            </TextBlock>
+
+            <TextBlock Grid.Row="5" FontWeight="Bold" FontSize="18" Margin="0,20,0,10">Markets:</TextBlock>
+
+            <ScrollViewer Grid.Row="6" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ListView ItemsSource="{Binding CurrencyDetail.Markets}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="5"/>
+                                <TextBlock Text="(" FontWeight="Bold" Margin="0"/>
+                                <TextBlock Text="{Binding Id}" FontWeight="Bold" Margin="0"/>
+                                <TextBlock Text=")" FontWeight="Bold" Margin="0"/>
+                                <TextBlock Text=" - Price: " FontWeight="Bold" Margin="5"/>
+                                <TextBlock Text="{Binding Price, StringFormat=C}" FontWeight="Bold" Margin="0"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+        <Button Content="Back" Command="{Binding GoBackCommand}" HorizontalAlignment="Left" Margin="10" Grid.Row="2" VerticalAlignment="Top" />
+    </Grid>
+</UserControl>
